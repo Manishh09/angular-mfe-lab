@@ -247,10 +247,7 @@ The Shell:
 #### Initialize Shell with Native Federation
 
 ```bash
-ng g @angular-architects/native-federation:init
-  --project shell
-  --port 4200
-  --type host
+ng g @angular-architects/native-federation:init --project shell --port 4200 --type host
 ```
 
 This creates:
