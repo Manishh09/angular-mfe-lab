@@ -1,7 +1,573 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-  }
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"newProjectRoot": "projects",
+	"projects": {
+		"shell": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/shell",
+			"sourceRoot": "projects/shell/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "@angular-architects/native-federation:build",
+					"options": {},
+					"configurations": {
+						"production": {
+							"target": "shell:esbuild:production"
+						},
+						"development": {
+							"target": "shell:esbuild:development",
+							"dev": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular-architects/native-federation:build",
+					"options": {
+						"target": "shell:serve-original:development",
+						"rebuildDelay": 0,
+						"dev": true,
+						"port": 4200
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular/build:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular/build:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/shell/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/shell/public"
+							}
+						],
+						"styles": [
+							"projects/shell/src/styles.scss"
+						]
+					}
+				},
+				"esbuild": {
+					"builder": "@angular/build:application",
+					"options": {
+						"browser": "projects/shell/src/main.ts",
+						"polyfills": [
+							"zone.js",
+							"es-module-shims"
+						],
+						"tsConfig": "projects/shell/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/shell/public"
+							}
+						],
+						"styles": [
+							"projects/shell/src/styles.scss"
+						]
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve-original": {
+					"builder": "@angular/build:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "shell:esbuild:production"
+						},
+						"development": {
+							"buildTarget": "shell:esbuild:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4200
+					}
+				}
+			}
+		},
+		"mfe-pokemon-list": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/mfe-pokemon-list",
+			"sourceRoot": "projects/mfe-pokemon-list/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "@angular-architects/native-federation:build",
+					"options": {},
+					"configurations": {
+						"production": {
+							"target": "mfe-pokemon-list:esbuild:production"
+						},
+						"development": {
+							"target": "mfe-pokemon-list:esbuild:development",
+							"dev": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular-architects/native-federation:build",
+					"options": {
+						"target": "mfe-pokemon-list:serve-original:development",
+						"rebuildDelay": 0,
+						"dev": true,
+						"port": 4201
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular/build:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular/build:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/mfe-pokemon-list/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/mfe-pokemon-list/public"
+							}
+						],
+						"styles": [
+							"projects/mfe-pokemon-list/src/styles.scss"
+						]
+					}
+				},
+				"esbuild": {
+					"builder": "@angular/build:application",
+					"options": {
+						"browser": "projects/mfe-pokemon-list/src/main.ts",
+						"polyfills": [
+							"zone.js",
+							"es-module-shims"
+						],
+						"tsConfig": "projects/mfe-pokemon-list/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/mfe-pokemon-list/public"
+							}
+						],
+						"styles": [
+							"projects/mfe-pokemon-list/src/styles.scss"
+						]
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve-original": {
+					"builder": "@angular/build:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "mfe-pokemon-list:esbuild:production"
+						},
+						"development": {
+							"buildTarget": "mfe-pokemon-list:esbuild:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4200
+					}
+				}
+			}
+		},
+		"mfe-pokemon-details": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/mfe-pokemon-details",
+			"sourceRoot": "projects/mfe-pokemon-details/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "@angular-architects/native-federation:build",
+					"options": {},
+					"configurations": {
+						"production": {
+							"target": "mfe-pokemon-details:esbuild:production"
+						},
+						"development": {
+							"target": "mfe-pokemon-details:esbuild:development",
+							"dev": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular-architects/native-federation:build",
+					"options": {
+						"target": "mfe-pokemon-details:serve-original:development",
+						"rebuildDelay": 0,
+						"dev": true,
+						"port": 4202
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular/build:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular/build:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/mfe-pokemon-details/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/mfe-pokemon-details/public"
+							}
+						],
+						"styles": [
+							"projects/mfe-pokemon-details/src/styles.scss"
+						]
+					}
+				},
+				"esbuild": {
+					"builder": "@angular/build:application",
+					"options": {
+						"browser": "projects/mfe-pokemon-details/src/main.ts",
+						"polyfills": [
+							"zone.js",
+							"es-module-shims"
+						],
+						"tsConfig": "projects/mfe-pokemon-details/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/mfe-pokemon-details/public"
+							}
+						],
+						"styles": [
+							"projects/mfe-pokemon-details/src/styles.scss"
+						]
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve-original": {
+					"builder": "@angular/build:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "mfe-pokemon-details:esbuild:production"
+						},
+						"development": {
+							"buildTarget": "mfe-pokemon-details:esbuild:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4200
+					}
+				}
+			}
+		},
+		"mfe-pokemon-types": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/mfe-pokemon-types",
+			"sourceRoot": "projects/mfe-pokemon-types/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "@angular-architects/native-federation:build",
+					"options": {},
+					"configurations": {
+						"production": {
+							"target": "mfe-pokemon-types:esbuild:production"
+						},
+						"development": {
+							"target": "mfe-pokemon-types:esbuild:development",
+							"dev": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular-architects/native-federation:build",
+					"options": {
+						"target": "mfe-pokemon-types:serve-original:development",
+						"rebuildDelay": 0,
+						"dev": true,
+						"port": 4203
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular/build:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular/build:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/mfe-pokemon-types/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/mfe-pokemon-types/public"
+							}
+						],
+						"styles": [
+							"projects/mfe-pokemon-types/src/styles.scss"
+						]
+					}
+				},
+				"esbuild": {
+					"builder": "@angular/build:application",
+					"options": {
+						"browser": "projects/mfe-pokemon-types/src/main.ts",
+						"polyfills": [
+							"zone.js",
+							"es-module-shims"
+						],
+						"tsConfig": "projects/mfe-pokemon-types/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/mfe-pokemon-types/public"
+							}
+						],
+						"styles": [
+							"projects/mfe-pokemon-types/src/styles.scss"
+						]
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve-original": {
+					"builder": "@angular/build:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "mfe-pokemon-types:esbuild:production"
+						},
+						"development": {
+							"buildTarget": "mfe-pokemon-types:esbuild:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4200
+					}
+				}
+			}
+    },
+    "models": {
+      "projectType": "library",
+      "root": "projects/libs/shared/models",
+      "sourceRoot": "projects/libs/shared/models/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/libs/shared/models/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/libs/shared/models/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/libs/shared/models/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "services": {
+      "projectType": "library",
+      "root": "projects/libs/shared/services",
+      "sourceRoot": "projects/libs/shared/services/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/libs/shared/services/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/libs/shared/services/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/libs/shared/services/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "ui": {
+      "projectType": "library",
+      "root": "projects/libs/shared/ui",
+      "sourceRoot": "projects/libs/shared/ui/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/libs/shared/ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/libs/shared/ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/libs/shared/ui/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    }
+
+	},
+	"cli": {
+		"analytics": "1591b027-95a6-43e6-ac78-f0e3779c4ebd"
+	}
 }

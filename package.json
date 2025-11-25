@@ -1,12 +1,15 @@
 {
-  "name": "angular-monorepo-starter",
+  "name": "angular-mfe-lab",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build:libs": "ng build models && ng build services && ng build ui",
+    "build:mfes": "ng build pokemon-list  && ng build pokemon-details && ng build shell",
+    "build:shell": "ng build shell --configuration production"
   },
   "prettier": {
     "printWidth": 100,
@@ -22,16 +25,23 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^20.3.0",
     "@angular/common": "^20.3.0",
     "@angular/compiler": "^20.3.0",
     "@angular/core": "^20.3.0",
     "@angular/forms": "^20.3.0",
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
+    "@softarc/native-federation-node": "^3.3.4",
+    "es-module-shims": "^1.5.12",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@angular-architects/native-federation": "^20.1.7",
+    "@angular-devkit/build-angular": "^20.3.11",
+    "@angular/build": "^20.3.11",
     "@angular/cli": "^20.3.0",
     "@angular/compiler-cli": "^20.3.0",
     "@types/jasmine": "~5.1.0",
@@ -41,6 +51,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-packagr": "^20.3.0",
     "typescript": "~5.9.2"
   }
 }

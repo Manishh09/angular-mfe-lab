@@ -11,9 +11,22 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "experimentalDecorators": true,
+    "sourceMap": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve"
+    "module": "preserve",
+    "baseUrl": "./",
+    "paths": {
+    "@pokemon-mfe/shared/models": [
+      "projects/libs/shared/models/src/public-api.ts"
+    ],
+    "@pokemon-mfe/shared/services": [
+      "projects/libs/shared/services/src/public-api.ts"
+    ],
+    "@pokemon-mfe/shared/ui": [
+      "projects/libs/shared/ui/src/public-api.ts"
+    ]
+  }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -22,5 +35,56 @@
     "typeCheckHostBindings": true,
     "strictTemplates": true
   },
-  "files": []
+  "files": [],
+  "references": [
+    {
+      "path": "./projects/shell/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/shell/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/mfe-pokemon-list/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/mfe-pokemon-list/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/mfe-pokemon-details/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/mfe-pokemon-details/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/mfe-pokemon-types/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/mfe-pokemon-types/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/libs/shared/models/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/libs/shared/models/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/libs/shared/models/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/libs/shared/models/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/libs/shared/services/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/libs/shared/services/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/libs/shared/ui/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/libs/shared/ui/tsconfig.spec.json"
+    }
+  ],
+
 }
